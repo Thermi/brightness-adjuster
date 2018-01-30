@@ -95,9 +95,9 @@ optional arguments:
 
 # Known Problems
 * The tool (rather ddcutil) is slow. That is because the transactions over i2c are slow. [The project page of ddcutil elaborates on that.](http://www.ddcutil.com/tuning/)
-```
-I2C is an inherently unreliable protocol, requiring retry management. Furthermore, 90% of ddcutil's elapsed time is spent in timeouts mandated by the DDC specification.
-```
+   ```
+   I2C is an inherently unreliable protocol, requiring retry management. Furthermore, 90% of ddcutil's elapsed time is spent in timeouts mandated by the DDC specification.
+   ```
 
 # Bug reporting
 Unless the error is related to the script or python itself, please file issues in the [ddcutil repo's issue tracker](https://github.com/rockowitz/ddcutil/issues).
