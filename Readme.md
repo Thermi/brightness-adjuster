@@ -71,7 +71,7 @@ Four verbs are available:
 * test
   Test if the tool can access can find and access the primary monitor.
 
-### Help message
+### Help Message
 ```
 $ ./brightnessAdjuster.py -h
 usage: brightnessAdjuster.py [-h] [-v] [-m MAXBRIGHTNESS] [-b VCP] verb value
