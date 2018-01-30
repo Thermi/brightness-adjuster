@@ -1,0 +1,5 @@
+# user defined udev rule
+# it adjusts the group of the i2c* devices in /dev to have the group "i2c" and the access rights 0660
+
+KERNEL=="i2c-0"     , GROUP="i2c", MODE="0660"
+KERNEL=="i2c-[1-9]*", GROUP="i2c", MODE="0666"
