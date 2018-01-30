@@ -43,6 +43,7 @@ Dependencies:
       6. Now you need to log out and log back in or get a new login shell and run the script.
          `$ ./brightnessAdjuster.py test 0`
          If the script worked, you're all set.
+   
    else
       1. Create the group i2c.
          `# groupadd -r i2c`
