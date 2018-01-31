@@ -75,15 +75,20 @@ Four verbs are available:
 ### Help Message
 ```
 $ ./brightnessAdjuster.py -h
-usage: brightnessAdjuster.py [-h] [-v] [-m MAXBRIGHTNESS] [-b VCP] verb value
+usage: brightnessAdjuster.py [-h] [-v] [-m MAXBRIGHTNESS] [-b VCP] [-n BUS]
+                             verb value
 
 Increases or Decreases the brightness of the primary monitor.
 
 positional arguments:
-  verb                  Can be "dec" to decrement the brightness by "value" or
-                        "inc" to increment the brightness by "value".
+  verb                  Can be "dec" to decrement the brightness by "value",
+                        "inc" to increment the brightness by "value", "test"
+                        to test the needed baseline functionality of the i2c
+                        stack and your devices and "set" to simply set a given
+                        value.
   value                 The difference to be applied to the monitor's
-                        brightness.
+                        brightness or the value to set, if the verb "set" is
+                        used.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -92,6 +97,10 @@ optional arguments:
                         Sets the maximum brightness. The default is 100.
   -b VCP                The feature number of the brightness parameter. The
                         default is 10.
+  -n BUS, --bus BUS     The bus number of the display. Setting this to the
+                        right value speeds up the operation of the tool
+                        significantly. The default is "x", which means not
+                        known.
 ```
 
 # Known Problems

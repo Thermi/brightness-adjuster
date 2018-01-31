@@ -52,10 +52,10 @@ class BrightnessAdjuster:
 			dest="bus")
 
 		parser.add_argument("verb",
-			help="""Can be "dec" to decrement the brightness by "value" or "inc" to increment the brightness by "value".""")
+			help="""Can be "dec" to decrement the brightness by "value", "inc" to increment the brightness by "value", "test" to test the needed baseline functionality of the i2c stack and your devices and "set" to  simply set a given value.""")
 		
 		parser.add_argument("value",
-			help="""The difference to be applied to the monitor's brightness.""")
+			help="""The difference to be applied to the monitor's brightness or the value to set, if the verb "set" is used. """)
 		
 		self.args = parser.parse_args()
 
