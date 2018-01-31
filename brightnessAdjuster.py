@@ -44,7 +44,13 @@ class BrightnessAdjuster:
 			default=10,
 			type=int,
 			dest="vcp")
-		
+
+		parser.add_argument('-n',
+			'--bus',
+			help="""The bus number of the display. Setting this to the right value speeds up the operation of the tool significantly. The default is "x", which means not known.""",
+			default="x",
+			dest="bus")
+
 		parser.add_argument("verb",
 			help="""Can be "dec" to decrement the brightness by "value" or "inc" to increment the brightness by "value".""")
 		
@@ -61,13 +67,26 @@ class BrightnessAdjuster:
 		if {
 			"inc" : True,
 			"dec" : True,
-			"test" : True
+			"test" : True,
+			"set" : True
 		}.get(self.args.verb, None) == None:
 			eprint("""Error: verb can only be "dec", "inc" or "test".""")
 			sys.exit(1)
 
+		if self.args.bus != "x":
+			try:
+				int(self.args.bus)
+			except:
+				eprint("ERROR: bus needs to be an integer.")
+				sys.exit(1)
+
 	def getBrightness(self):
-		cmd = "ddcutil -t getvcp {}".format(self.args.vcp).split()
+		cmd = "ddcutil -t"
+		if self.args.bus != "x":
+			cmd += " --bus={} --nodetect".format(self.args.bus)
+
+		cmd += " getvcp {}".format(self.args.vcp)
+		cmd = cmd.split()
 
 		if self.args.verbose:
 			print("cmd: {}".format(cmd))
@@ -91,10 +110,16 @@ class BrightnessAdjuster:
 			eprint("ERROR: Could not decode {} as integer base 10".format(brightness))
 			sys.exit(1)
 
+
 		return brightness
 
 	def setBrightness(self, value):
-		cmd = "ddcutil -t setvcp {} {}".format(self.args.vcp, value).split()
+		cmd = "ddcutil -t"
+		if self.args.bus != "x":
+			cmd += " --bus={} --nodetect".format(self.args.bus)
+
+		cmd += " setvcp {} {}".format(self.args.vcp, value)
+		cmd = cmd.split()
 		
 		if self.args.verbose:
 			print("cmd: {}".format(cmd))
@@ -113,7 +138,13 @@ class BrightnessAdjuster:
 		return 
 
 	def test(self):
-		cmd = "ddcutil capabilities".split()
+		cmd = "ddcutil "
+		if self.args.bus != "x":
+			cmd += " --bus={} --nodetect".format(self.args.bus)
+
+		cmd += " capabilities"
+
+		cmd = cmd.split()
 		
 		if self.args.verbose:
 			print("cmd: {}".format(cmd))
@@ -147,9 +178,7 @@ class BrightnessAdjuster:
 				"inc" : lambda x: brightness + x,
 				"dec" : lambda x: brightness - x,
 				}.get(self.args.verb)(self.args.value)
-			
-			print("newBrightness: {}".format(newBrightness))
-			
+						
 			if newBrightness > self.args.maxBrightness:
 				# exit silently, maximum brightness was reached.
 				if self.args.verbose:
@@ -157,7 +186,6 @@ class BrightnessAdjuster:
 				sys.exit(0)
 
 			self.setBrightness(newBrightness)
-
 
 if __name__ == '__main__':
 	adjuster = BrightnessAdjuster()
