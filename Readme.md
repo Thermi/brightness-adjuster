@@ -60,7 +60,7 @@ Dependencies:
          `$ ./brightnessAdjuster.py test 0`
          If the script worked, you're all set.
 
-## Usage
+## Usage of brightnessAdjuster.py
 
 Four verbs are available:
 * dec
@@ -101,6 +101,30 @@ optional arguments:
                         right value speeds up the operation of the tool
                         significantly. The default is "x", which means not
                         known.
+```
+
+## Usage of inputSwitcher.py
+
+The tool cycles between the given values. If the current value that the monitor returns is not in the list, the first value is set. Otherwise the next from the right. If the end of the list is reached, the first value is set.
+
+### Help Message
+```
+$ ./inputSwitcher.py -h
+usage: inputSwitcher.py [-h] [-v] [-b VCP] [-n BUS] values [values ...]
+
+Cycles between inputs of the primary monitor.
+
+positional arguments:
+  values             The list of values to cycle between.
+
+optional arguments:
+  -h, --help         show this help message and exit
+  -v, --verbose      Enables verbose mode. Disabled by default.
+  -b VCP             The feature number of the input source parameter. The
+                     default is 60.
+  -n BUS, --bus BUS  The bus number of the display. Setting this to the right
+                     value speeds up the operation of the tool significantly.
+                     The default is "x", which means not known.
 ```
 
 # Known Problems
