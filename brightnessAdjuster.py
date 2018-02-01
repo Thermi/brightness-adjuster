@@ -70,7 +70,7 @@ class BrightnessAdjuster:
 			"test" : True,
 			"set" : True
 		}.get(self.args.verb, None) == None:
-			eprint("""Error: verb can only be "dec", "inc" or "test".""")
+			eprint("""Error: verb can only be "dec", "inc", "set" or "test".""")
 			sys.exit(1)
 
 		if self.args.bus != "x":
